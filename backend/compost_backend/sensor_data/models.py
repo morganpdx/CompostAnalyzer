@@ -1,12 +1,17 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from compost_backend.compost_sensor.models import CompostSensor
 
 class SensorData(models.Model):
-    name = models.CharField(max_length = 100)
-    description = models.CharField(max_length = 1000)
     timestamp = models.DateTimeField(auto_now = True)
     value = models.FloatField()
+    sensor = models.ForeignKey(
+        CompostSensor,
+        on_delete=models.CASCADE,
+        verbose_name="the compost sensor that generated this data",
+        null=True
+    )
 
     def __str__(self):
-        return self.name
+        return self.id or ''
