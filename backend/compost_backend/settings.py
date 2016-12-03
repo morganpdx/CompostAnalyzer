@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'compost_backend.compost_type',
+    'compost_backend.compost_bin',
     'compost_backend.compost_sensor',
     'compost_backend.compost_user',
     'compost_backend.sensor_data'
