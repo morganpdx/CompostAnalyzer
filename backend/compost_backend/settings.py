@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'compost_backend.compost_bin',
     'compost_backend.compost_sensor',
     'compost_backend.compost_user',
-    'compost_backend.sensor_data'
+    'compost_backend.sensor_data',
+    'rest_framework'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -123,3 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
