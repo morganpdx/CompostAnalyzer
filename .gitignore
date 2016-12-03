@@ -65,3 +65,6 @@ celerybeat-schedule
 # virtualenv
 venv/
 ENV/
+
+#Pycharm
+.idea
