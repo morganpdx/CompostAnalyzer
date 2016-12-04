@@ -13,5 +13,6 @@ class SensorData(models.Model):
         null=True
     )
 
+
     def __str__(self):
-        return self.id or ''
+        return self.id

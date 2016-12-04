@@ -21,6 +21,10 @@ from compost_backend.compost_api import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'compostusers', views.CompostUserViewSet)
+router.register(r'compostbins', views.CompostBinViewSet)
+router.register(r'compostsensors', views.CompostSensorViewSet)
+router.register(r'sensordata', views.SensorDataViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

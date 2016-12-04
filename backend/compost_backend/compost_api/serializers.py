@@ -18,25 +18,25 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 
-class CompostUserSerializer(serializers.Serializer):
+class CompostUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompostUser
         fields = ('first_name', 'last_name')
 
 
-class CompostBinSerializer(serializers.Serializer):
+class CompostBinSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompostBin
         fields = ('name', 'description', 'user')
 
 
-class CompostSensorSerializer(serializers.Serializer):
+class CompostSensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompostSensor
         fields = ('type', 'bin')
 
 
-class SensorDataSerializer(serializers.Serializer):
+class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorData
-        fields = ('timestamp', 'value', 'sensor')
+        fields = ('compost_bin', 'timestamp', 'value', 'sensor')

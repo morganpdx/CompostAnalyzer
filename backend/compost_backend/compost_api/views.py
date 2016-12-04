@@ -1,7 +1,10 @@
 from django.shortcuts import render
 
 from django.contrib.auth.models import User, Group
+from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.decorators import detail_route, list_route
+from rest_framework.response import Response
 from compost_backend.compost_user.models import CompostUser
 from compost_backend.compost_bin.models import CompostBin
 from compost_backend.compost_sensor.models import CompostSensor
@@ -35,10 +38,25 @@ class CompostUserViewSet(viewsets.ModelViewSet):
 
 class CompostBinViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows CospostBins to be viewed or edited.
+    API endpoint that allows CompostBins to be viewed or edited.
+    POST requires: Device/Bin ID, sensor type, array of sensor data
     """
     queryset = CompostBin.objects.all()
     serializer_class = CompostBinSerializer
+
+    @detail_route(methods=['post'])
+    def add_sensor_data(self, request, pk=None):
+        bin = self.get_object()
+        sensor_type = request.data['sensor_type']
+        sensor = CompostSensor.objects.get(type=sensor_type, bin=bin.id)
+        serializer = SensorDataSerializer(data=request.data)
+        if serializer.is_valid():
+            sensor.add_data(serializer.data['values'])
+            sensor.save()
+            return Response({'status': 'new values saved'})
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class CompostSensorViewSet(viewsets.ModelViewSet):
@@ -55,6 +73,3 @@ class SensorDataViewSet(viewsets.ModelViewSet):
     """
     queryset = SensorData.objects.all()
     serializer_class = SensorDataSerializer
-
-
-
