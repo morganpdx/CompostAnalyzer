@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 from compost_backend.compost_api import views
-from compost_backend import main_app
+from compost_backend.main_app import views as main_app_views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -32,5 +32,6 @@ router.register(r'sensordata', views.SensorDataViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
+    url(r'^$', main_app_views.homepage, name='homepage'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

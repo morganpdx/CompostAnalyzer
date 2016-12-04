@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'compost_backend.compost_sensor',
     'compost_backend.compost_user',
     'compost_backend.sensor_data',
+    'compost_backend.main_app',
     'rest_framework'
 ]
 
