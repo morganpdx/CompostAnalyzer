@@ -21,22 +21,22 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class CompostUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompostUser
-        fields = ('first_name', 'last_name')
+        fields = ('id', 'first_name', 'last_name')
 
 
 class CompostBinSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompostBin
-        fields = ('name', 'description', 'user')
+        fields = ('id', 'name', 'description', 'user')
 
 
 class CompostSensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompostSensor
-        fields = ('type', 'bin')
+        fields = ('id', 'type', 'bin')
 
 
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorData
-        fields = ('compost_bin', 'timestamp', 'value', 'sensor')
+        fields = ('id', 'timestamp', 'value', 'sensor')

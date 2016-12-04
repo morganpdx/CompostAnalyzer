@@ -2,14 +2,13 @@ from __future__ import unicode_literals
 
 from django.db import models
 from compost_backend.compost_bin.models import CompostBin
-# from compost_backend.sensor_data.models import SensorData
 
 
 class CompostSensor(models.Model):
     SENSOR_TYPES = (
-        ('temp', 'Temperature'),
-        ('hum', 'Humidity'),
-        ('vib', 'Vibration')
+        ('Temperature', 'Temperature'),
+        ('Humidity', 'Humidity'),
+        ('Vibration', 'Vibration')
     )
     type = models.CharField(max_length=1, choices=SENSOR_TYPES)
     bin = models.ForeignKey(
@@ -19,15 +18,10 @@ class CompostSensor(models.Model):
         null=True
     )
 
-    def __str__(self):
-        return self.type + ' sensor'
 
-    def add_data(self, sensor_values):
-        """
-        Save an array of values to the sensor
-        """
-        # for d in sensor_values:
-        #     SensorData.objects.create(
-        #         sensor = self,
-        #         data = d
-        #     )
+    def __str__(self):
+        return self.type + ' sensor for bin ID# ' + str(self.get_bin())
+
+
+    def get_bin(self):
+        return self.bin.id
