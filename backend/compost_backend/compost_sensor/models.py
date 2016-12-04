@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from compost_backend.compost_bin.models import CompostBin
-from compost_backend.sensor_data.models import SensorData
+# from compost_backend.sensor_data.models import SensorData
+
 
 class CompostSensor(models.Model):
     SENSOR_TYPES = (
@@ -25,8 +26,8 @@ class CompostSensor(models.Model):
         """
         Save an array of values to the sensor
         """
-        for d in sensor_values:
-            SensorData.object.create(
-                sensor = self,
-                data = d
-            )
+        # for d in sensor_values:
+        #     SensorData.objects.create(
+        #         sensor = self,
+        #         data = d
+        #     )

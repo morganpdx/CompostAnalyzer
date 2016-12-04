@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from compost_backend.compost_sensor.models import CompostSensor
 
+
 class SensorData(models.Model):
     timestamp = models.DateTimeField(auto_now = True)
     value = models.FloatField()
