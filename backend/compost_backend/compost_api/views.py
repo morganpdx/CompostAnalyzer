@@ -40,6 +40,8 @@ class CompostBinViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows CompostBins to be viewed or edited.
     POST requires: Device/Bin ID, sensor type, array of sensor data
+
+    This approach assumes only one type of sensor per device.
     """
     queryset = CompostBin.objects.all()
     serializer_class = CompostBinSerializer
@@ -51,8 +53,13 @@ class CompostBinViewSet(viewsets.ModelViewSet):
         sensor = CompostSensor.objects.get(type=sensor_type, bin=bin.id)
         serializer = SensorDataSerializer(data=request.data)
         if serializer.is_valid():
-            sensor.add_data(serializer.data['values'])
-            sensor.save()
+
+            for d in serializer.data['values']:
+                SensorData.objects.create(
+                    sensor=sensor,
+                    data=d
+                )
+
             return Response({'status': 'new values saved'})
         else:
             return Response(serializer.errors,
